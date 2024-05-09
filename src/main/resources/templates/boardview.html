@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title><게시글 상세 페이지></title>
+    <style>
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .like-btn {
+            background-color: #ffffff;
+            border: 1px solid #ff0000;
+            color: #ff0000;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 5px;
+        }
+        .like-btn.clicked {
+            background-color: #ff0000;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+<h1 th:text="${board.title}">제목</h1>
+<p th:text="${board.content}">내용</p>
+
+<div class="btn-container">
+    <button class="like-btn" id="like-btn" onclick="toggleLike('${board.id}')">좋아요</button>
+    <a class="modify-btn" th:href="@{/board/modify/{id}(id=${board.id})}">수정</a>
+    <a class="delete-btn" th:href="@{/board/delete(id=${board.id})}">삭제</a>
+</div>
+
+<script>
+    function toggleLike(boardId) {
+        var likeBtn = document.getElementById('like-btn');
+        likeBtn.classList.toggle('clicked');
+        console.log('Like button clicked');
+    }
+</script>
+
+</body>
+</html>
